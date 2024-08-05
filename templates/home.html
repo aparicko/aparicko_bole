@@ -1,0 +1,69 @@
+<h1>URL Shortener</h1>
+
+{% if messages %}
+  {% for message in messages %}
+    <h3>{{ message }}</h3>
+  {% endfor %}
+{% endif %}
+
+
+<form action="create_job" method="get">
+  <label for="job name">Job name</label>
+  <input type="text" name="job name" value="">
+  <br>
+  <label for="text">GBN</label>
+  <input type="text" name="gbn" value="">
+  <br>
+  <input type="submit" value="Create job">
+</form>
+
+{% if data.jobs %}
+  <h2>Job Queue</h2>
+  <table border="1">
+    <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Jenkins URL</th>
+          <th>Image URL</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in data.jobs %}
+            <tr>
+                {% if job.id %}
+                  <td>{{ job.id }}</td>
+                {% else %}
+                  <td>No ID available</td>
+                {% endif %}
+
+                {% if job.name %}
+                  <td>{{ job.name }}</td>
+                {% else %}
+                  <td>No name available</td>
+                {% endif %}
+
+                {% if job.status %}
+                  <td>{{ job.status }}</td>
+                {% else %}
+                  <td>No status available</td>
+                {% endif %}
+
+                {% if job.jenkins_url %}
+                <td><a href="{{ job.jenkins_url }}">Jenkins job</a></td>
+                {% else %}
+                  <td>No jenkins url available</td>
+                {% endif %}
+
+                {% if job.image_url %}
+                  <td><a href="{{ job.image_url }}">View Image</a></td>
+                {% else %}
+                  <td>No image url available</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
