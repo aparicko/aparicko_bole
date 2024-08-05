@@ -22,8 +22,9 @@ def home_page():
 def create_job():
     print(request.args)
     messages = []
+    global data
     if 'jobs' not in data:
-        data.add('jobs', [])
+        data['jobs'] = []
     id = len(data['jobs']) + 1
     
     job = {"id": id, "status": "in-progress", "image_url": "https://via.placeholder.com/151", "jenkins_url": "https://via.placeholder.com/151"}
